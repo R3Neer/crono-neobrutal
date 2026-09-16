@@ -113,6 +113,8 @@ function StopwatchFace({elapsed}:{elapsed:number}){
 function isMobileHandset(){
  const browser=navigator as Navigator&{userAgentData?:{mobile?:boolean}};
  const agent=navigator.userAgent;
+ const compactTouchScreen=navigator.maxTouchPoints>0&&Math.min(window.screen.width,window.screen.height)<=600;
+ if(compactTouchScreen)return true;
  if(/iPad/i.test(agent)||(/Macintosh/i.test(agent)&&navigator.maxTouchPoints>1))return false;
  if(/Android/i.test(agent)&&!/Mobile/i.test(agent))return false;
  if(typeof browser.userAgentData?.mobile==='boolean')return browser.userAgentData.mobile;

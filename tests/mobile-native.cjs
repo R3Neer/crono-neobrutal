@@ -17,6 +17,18 @@ const {chromium,expect}=require('@playwright/test');
  expect(phoneGeometry.app.x).toBe(0);expect(phoneGeometry.app.width).toBe(390);
  await phone.close();
 
+ const desktopModePhone=await browser.newContext({
+  viewport:{width:390,height:844},
+  screen:{width:390,height:844},
+  hasTouch:true,
+  userAgent:'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15',
+ });
+ const desktopModePage=await desktopModePhone.newPage();await desktopModePage.goto('http://127.0.0.1:5173/');
+ await expect(desktopModePage.locator('.device-workbench')).toHaveClass(/mobile-handset/);
+ await expect(desktopModePage.locator('.zoom-controls')).toBeHidden();
+ await expect(desktopModePage.locator('.dynamic-island')).toBeHidden();
+ await desktopModePhone.close();
+
  const tablet=await browser.newContext({
   viewport:{width:820,height:1180},
   isMobile:true,
@@ -29,6 +41,6 @@ const {chromium,expect}=require('@playwright/test');
  await expect(tabletPage.locator('.dynamic-island')).toBeVisible();
  await tablet.close();
 
- console.log('Native phone view and framed tablet view verified');
+ console.log('Native phone, desktop-mode phone, and framed tablet views verified');
  await browser.close();
 })().catch(error=>{console.error(error);process.exit(1)});
