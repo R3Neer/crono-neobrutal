@@ -1,0 +1,7 @@
+node_modules/
+dist/
+artifacts/demo-frames/
+artifacts/snapshots/
+artifacts/*.json
+*.tsbuildinfo
+.DS_Store

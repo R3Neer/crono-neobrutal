@@ -1,0 +1,4 @@
+import {makeSand,advanceSand,physicsStep} from '../src/sand.ts';
+import assert from 'node:assert/strict';
+for(const seconds of [4,10,60,300,5999]){const m=makeSand(seconds);console.log(seconds,m.count,m.unit);assert.equal(m.count,Math.ceil(seconds/m.unit));const closest=[...m.grains].sort((a,b)=>Math.hypot(a.x-65,a.y-145)-Math.hypot(b.x-65,b.y-145))[0].id;advanceSand(m,.01,seconds);if(m.releases.length)assert.equal(m.releases[0],closest);for(let t=.03;t<=Math.min(seconds,8);t+=.03)advanceSand(m,t,seconds);advanceSand(m,seconds,seconds);for(let k=0;k<1200;k++)physicsStep(m.grains);assert(m.grains.every(p=>p.y>150));let min=Infinity;for(let i=0;i<m.count;i++)for(let j=i+1;j<m.count;j++)min=Math.min(min,Math.hypot(m.grains[i].x-m.grains[j].x,m.grains[i].y-m.grains[j].y));assert(min>4);console.log('end',Math.min(...m.grains.map(p=>p.y)),Math.max(...m.grains.map(p=>p.y)),'min distance',min);assert(m.grains.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)));}
+

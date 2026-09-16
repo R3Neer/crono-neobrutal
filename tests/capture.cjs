@@ -1,0 +1,2 @@
+const {chromium}=require('@playwright/test');
+(async()=>{const browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});await page.goto('http://127.0.0.1:5173');await page.evaluate(()=>document.fonts.ready);await page.screenshot({path:'artifacts/snapshots/home-pass-1.png'});await browser.close()})().catch(e=>{console.error(e);process.exit(1)});

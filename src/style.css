@@ -1,0 +1,223 @@
+:root{font-family:'JetBrains Mono',monospace;color:#f7f7f2;background:#242424;font-synthesis:none;--ink:#050505;--paper:#f3f0e6;--cyan:#00e5ff;--yellow:#ffe500;--green:#39ff14;--hand:var(--cyan)}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0;border-radius:0}button:focus-visible,input:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}button:active{translate:3px 3px}button:disabled{cursor:default}button,input{-webkit-tap-highlight-color:transparent}button{transition:translate 100ms steps(2)}.app{position:relative;width:100%;max-width:430px;min-height:100dvh;margin:auto;background:var(--ink)}.home{height:100dvh;min-height:740px;max-height:932px;overflow:hidden;container-type:inline-size}.paper{position:absolute;width:100%;height:100%;inset:0;pointer-events:none}.world-preview{position:absolute;top:4%;left:4%;width:53%;aspect-ratio:.83;background:transparent;text-align:left;padding:0 4px;color:#f7f7f2}.world-preview .pixels{width:92%;display:block;margin:0 auto 14px}.world-preview strong{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(30px,9.3cqw,40px);font-weight:400;text-transform:uppercase;display:block;line-height:1.1}.world-preview span{font-size:14px;color:var(--cyan);display:block;margin-top:7px}.world-preview:active{color:var(--cyan)}.timer{position:absolute;top:4%;right:5%;width:29%;height:57%;color:var(--ink);display:flex;align-items:center;flex-direction:column}.timer-name{font-weight:800;font-size:17px;letter-spacing:1px;transform:rotate(3deg);margin-bottom:17px;border-bottom:3px solid var(--ink)}.value-card{width:100%;background:var(--paper);border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);text-align:center;position:relative;z-index:2}.value-card span{display:block;font-size:11px;font-weight:800;letter-spacing:-.5px;border-bottom:2px solid var(--ink);padding:5px 0}.value-card output,.value-card input{font-size:clamp(22px,6.5cqw,28px);font-weight:800;letter-spacing:-1.5px;display:block;padding:7px 0;width:100%;font-variant-numeric:tabular-nums}.remaining{transform:rotate(2deg)}.total{transform:rotate(-3deg);background:var(--yellow)}.total input{background:transparent;border:0;text-align:center;border-radius:0;color:var(--ink);min-height:44px}.total input:disabled{-webkit-text-fill-color:var(--ink);opacity:1}.total:has(input:disabled){background:var(--paper)}.hourglass{position:relative;flex:1;width:100%;min-height:225px;margin:18px 0 12px}.hourglass>svg{height:100%;width:100%;overflow:visible}.timer-control{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-3deg);font-weight:800;font-size:16px;min-width:96px;min-height:46px;background:var(--cyan);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);z-index:3}.hard:active{box-shadow:1px 1px 0 var(--ink)}.running .timer-control{background:var(--green)}.finished .remaining{background:var(--yellow)}.done{font-weight:800;margin-top:12px;font-size:13px;background:var(--yellow);padding:3px}.stopwatch{position:absolute;left:4.2%;bottom:6%;width:69%;height:43%;display:flex;flex-direction:column;justify-content:flex-end;gap:19px}.torn-hole{position:relative;background:var(--ink);width:100%;aspect-ratio:1.02;clip-path:polygon(48% 1%,55% 4%,62% 2%,68% 7%,76% 8%,79% 14%,87% 17%,88% 24%,95% 29%,94% 36%,99% 43%,97% 50%,100% 57%,96% 65%,96% 72%,89% 76%,86% 84%,78% 86%,73% 93%,65% 93%,58% 98%,50% 96%,42% 100%,35% 96%,28% 97%,24% 91%,16% 88%,14% 81%,7% 76%,8% 68%,2% 62%,4% 54%,0% 46%,4% 39%,3% 31%,9% 26%,11% 18%,19% 15%,23% 9%,31% 8%,38% 3%,44% 5%)}.crono-label{position:absolute;top:6%;left:5%;width:90%;height:37%;fill:var(--paper);font-family:Impact,'Arial Narrow',sans-serif;font-size:48px;letter-spacing:3px}.torn-hole output{position:absolute;top:49%;left:50%;transform:translateX(-50%);font-size:clamp(30px,8.4cqw,36px);font-weight:800;letter-spacing:-1.8px;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--cyan)}.running .torn-hole output{color:var(--green)}.stopwatch-controls{display:flex;gap:25px;justify-content:center;padding:0 15px}.small-hole{background:var(--ink);width:91px;height:79px;clip-path:polygon(8% 11%,21% 5%,34% 8%,49% 0%,63% 6%,76% 4%,84% 13%,97% 20%,93% 37%,100% 51%,94% 64%,96% 78%,83% 85%,74% 97%,58% 92%,44% 100%,32% 94%,18% 95%,12% 80%,2% 71%,7% 56%,0% 42%,7% 30%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}.small-hole b{font-size:27px;line-height:1.1}.small-hole span{font-size:12px;font-weight:800}.small-hole.primary{color:var(--cyan);transform:rotate(4deg)}.running .small-hole.primary{color:var(--green)}.small-hole:focus-visible{clip-path:none}.falling-sand{animation:fall .45s linear infinite}@keyframes fall{to{transform:translateY(17px)}}header{display:flex;align-items:center;gap:15px;padding:26px 18px 24px}header .back{width:44px;height:44px;background:transparent;color:var(--cyan);padding:8px;flex-shrink:0}h1{font-family:Impact,'Arial Narrow',sans-serif;font-size:37px;line-height:1;margin:0;font-weight:400;letter-spacing:.3px}h1:focus{outline:none}.clock-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px;padding:10px 18px 30px}.clock-tile{position:relative;min-height:221px;min-width:0;background:var(--ink);border:3px solid var(--paper);box-shadow:4px 4px 0 var(--paper);text-align:left;padding:13px 10px 12px;display:flex;flex-direction:column;align-items:flex-start}.clock-tile>.pixels{width:100%;margin-bottom:12px;max-height:143px}.clock-tile strong{font-family:Impact,'Arial Narrow',sans-serif;font-size:28px;line-height:1.05;font-weight:400;text-transform:uppercase;overflow-wrap:anywhere}.clock-tile>span:not(.delete-badge):not(.remove-label){font-size:13px;margin-top:7px}.main-clock{background:var(--yellow);color:var(--ink);--hand:var(--ink);border-color:var(--yellow);box-shadow:4px 4px 0 var(--yellow)}.action-tile{justify-content:center;align-items:center;color:var(--cyan);border-color:var(--cyan);box-shadow:4px 4px 0 var(--cyan)}.action-tile>.pixels{width:76%;margin:0}.action-tile:disabled{color:#73736c;border-color:#73736c;box-shadow:4px 4px #73736c}.delete-badge{position:absolute;top:-12px;left:-10px;background:var(--cyan);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px var(--paper);width:38px;height:33px;padding:3px;z-index:1}.delete-selected{border-style:dashed;background:var(--cyan);color:var(--ink);--hand:var(--ink);box-shadow:4px 4px var(--cyan)}.remove-label{position:absolute;top:44%;left:5%;right:5%;background:var(--ink);color:var(--paper);font-size:14px;text-align:center;font-weight:800;padding:6px}.search{display:block;width:calc(100% - 40px);margin:0 18px 25px;background:var(--paper);border:3px solid var(--cyan);box-shadow:5px 5px var(--cyan);color:var(--ink);min-height:57px;padding:10px;font-weight:800;font-size:17px}.city-list{padding:0 20px 30px}.city-list button{display:flex;justify-content:space-between;align-items:center;gap:12px;background:transparent;border-bottom:2px solid var(--paper);width:100%;text-align:left;min-height:76px;padding:12px 0}.city-list strong{font-family:Impact,'Arial Narrow',sans-serif;font-size:28px;font-weight:400;text-transform:uppercase}.city-list span{font-size:14px;color:var(--cyan);white-space:nowrap}.notice{margin:0 18px;padding-bottom:20px;color:var(--yellow)}@media(min-width:600px){body{padding:24px 0}.app{min-height:844px}.home{height:844px;max-width:390px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}@media(max-height:760px){.home{overflow:visible}.app{min-height:760px}}
+/* Second visual pass: separate the two physical objects and keep labels readable. */
+.stopwatch{width:60%;bottom:5.7%}.value-card span{font-size:12px;letter-spacing:-.7px}.torn-hole output{font-size:clamp(29px,8.4cqw,36px)}.stopwatch-controls{gap:18px;padding:0}.torn-hole{clip-path:polygon(48% 1%,51% 3%,55% 2%,59% 5%,62% 2%,66% 7%,69% 6%,73% 10%,77% 9%,79% 14%,84% 15%,86% 19%,90% 21%,88% 25%,94% 29%,92% 33%,96% 36%,95% 40%,99% 43%,96% 48%,98% 51%,97% 55%,100% 59%,96% 63%,97% 68%,93% 71%,94% 75%,89% 77%,87% 83%,83% 84%,80% 89%,75% 88%,71% 94%,67% 92%,62% 96%,57% 95%,53% 99%,48% 96%,44% 100%,39% 97%,34% 98%,30% 94%,27% 96%,24% 91%,20% 92%,17% 87%,13% 86%,13% 81%,8% 77%,9% 73%,4% 69%,6% 64%,2% 60%,4% 55%,0% 50%,3% 46%,1% 41%,5% 37%,3% 33%,7% 29%,6% 26%,11% 22%,11% 18%,16% 16%,18% 12%,23% 13%,26% 8%,31% 9%,35% 5%,39% 7%,43% 2%)}
+.clock-grid{grid-auto-rows:clamp(232px,62vw,266px)}.clock-tile{height:100%;min-height:0}.world-preview strong{overflow-wrap:normal}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+/* Shorter upper void: approximately square, including the city caption. */
+.world-preview{top:3%;display:flex;flex-direction:column;justify-content:flex-start;aspect-ratio:.9}.world-preview .pixels{width:85%;margin:0 auto 11px}.world-preview strong{font-size:clamp(29px,8.5cqw,36px)}.world-preview span:not(.sr-only){margin-top:5px}
+/* User-directed saturated edition: full-height timer, themed digital clocks. */
+:root{--paper:#ff5286;--cutout:#2038c5}
+.timer{top:3%;right:4%;width:30%;height:92%}.timer-name{font-size:20px;margin-bottom:14px}.hourglass{margin:20px 0;min-height:0}.timer-control{min-height:52px;font-size:18px;min-width:106px;background:var(--yellow)}.remaining{background:#ffe500}.total{background:#39ff14}.total:has(input:disabled){background:#00e5ff}.value-card output,.value-card input{font-size:clamp(26px,7.4cqw,32px)}.done{position:absolute;bottom:-24px;margin:0}.stopwatch{bottom:7%;width:59%}.torn-hole{background:var(--cutout)}.crono-label{top:16%;left:6%;width:auto;height:auto;font-size:clamp(37px,11.5cqw,49px);letter-spacing:1px;line-height:1;color:var(--yellow);transform:rotate(-29deg);transform-origin:center}.torn-hole output{color:var(--yellow);top:54%}.running .torn-hole output{color:#baff39}.small-hole{background:var(--cutout);color:var(--yellow)}.small-hole.primary{color:var(--yellow)}.running .small-hole.primary{color:#baff39}.world-preview{color:var(--clock-bg);--hand:var(--clock-accent);top:3%;width:54%;left:3.5%}.world-preview .pixels{width:86%;margin:0 auto 9px}.world-preview span:not(.sr-only){color:var(--clock-accent)}.clock-tile:not(.action-tile){background:var(--clock-bg);color:var(--clock-ink);--hand:var(--clock-ink);border:3px solid var(--clock-ink);box-shadow:5px 5px 0 var(--clock-bg)}.clock-tile.main-clock{outline:4px solid #f7f7f2;outline-offset:3px}.clock-tile>.pixels{max-height:145px;flex-shrink:0}.main-badge{position:absolute;right:3px;top:3px;background:var(--ink);color:#fff;letter-spacing:1px;font-size:10px!important;line-height:1;padding:4px;margin:0!important}.clock-tile.delete-selected{border:4px dashed var(--ink);outline:3px solid #fff;outline-offset:1px}.search{background:var(--yellow)}.city-list button{border-bottom-color:var(--cyan)}
+/* Shared optical center: stopwatch opening and hourglass throat. */
+.stopwatch{top:calc(var(--timer-center,52dvh) - 28.92157cqw);bottom:auto;height:auto;gap:18px}.torn-hole{flex-shrink:0}.stopwatch-controls{flex-direction:column;align-items:center;gap:14px;padding:0}.small-hole{flex-shrink:0}.small-hole.primary{transform:rotate(2deg)}
+/* Interaction palette: cyan = actionable/selected; green = live output; yellow = readout/notice. */
+:root{--action:#00e5ff;--live:#39ff14;--readout:#ffe500}
+.timer-control,.running .timer-control{background:var(--action);color:var(--ink)}
+.remaining{background:var(--readout)}.running .remaining{background:var(--live)}.finished .remaining{background:var(--readout)}
+.total{background:var(--action)}.total:has(input:disabled){background:var(--paper)}
+.small-hole,.small-hole.primary,.running .small-hole.primary{background:var(--action);color:var(--ink)}
+.torn-hole output{color:var(--readout)}.running .torn-hole output{color:var(--live)}
+.clock-tile.main-clock{outline-color:var(--action)}.main-badge{background:var(--action);color:var(--ink)}
+.search{background:var(--action);border-color:var(--ink);box-shadow:5px 5px 0 var(--action)}.search::placeholder{color:#18363a;opacity:1}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--action)}
+.clock-tile:focus-visible,.world-preview:focus-visible,.back:focus-visible,.city-list button:focus-visible{outline:3px solid var(--action);outline-offset:4px}
+.clock-tile.delete-selected{outline-color:var(--action)}.remove-label{color:var(--action)}
+button:active:not(:disabled){outline-color:var(--action)}
+/* City deletion and material-specific controls. */
+.city-cell{position:relative;min-width:0;height:100%}.city-cell>.clock-tile{width:100%}
+.delete-badge{width:44px;height:44px;top:-9px;left:-9px;padding:7px;display:grid;place-items:center;margin:0}
+.clock-tile.delete-selected:not(.action-tile){background:var(--clock-ink);color:var(--clock-bg);--hand:var(--clock-bg);border:3px dashed var(--clock-bg);box-shadow:5px 5px 0 var(--clock-bg);outline:none}
+.remove-label{inset:auto;top:11px;left:50%;transform:translateX(-50%);width:25px;height:147px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;text-orientation:upright;letter-spacing:1px;background:var(--clock-ink);color:var(--clock-bg);padding:3px;font-size:17px;line-height:1;font-weight:800;pointer-events:none}
+.small-hole,.small-hole.primary,.running .small-hole.primary{background:var(--cutout);color:var(--ink);width:101px;height:83px;padding:12px}
+.control-card{display:flex;flex-direction:column;align-items:center;justify-content:center;width:66px;min-height:51px;background:var(--action);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);transform:rotate(-3deg)}
+.control-card b{font-size:23px}.control-card span{font-size:11px}.small-hole:active .control-card{box-shadow:none;translate:2px 2px}
+.crono-label{inset:0;width:100%;height:100%;transform:none;fill:var(--yellow);font-size:42px;letter-spacing:1px;pointer-events:none}
+header .back{width:52px;height:52px;background:var(--cutout);padding:10px;clip-path:polygon(9% 6%,27% 9%,41% 0,57% 6%,76% 3%,89% 15%,100% 31%,95% 49%,100% 68%,89% 82%,71% 96%,52% 92%,32% 100%,15% 88%,3% 72%,7% 50%,0 30%);display:grid;place-items:center}
+.back-card{display:grid;place-items:center;width:32px;height:32px;background:var(--action);border:2px solid var(--ink);color:var(--ink);font-size:29px;line-height:1;font-weight:800;box-shadow:2px 2px var(--ink)}
+header .back:focus-visible{clip-path:none}header{gap:12px}h1{font-size:clamp(30px,9vw,37px)}
+.crono-label{font-size:36px}
+/* Distinct material families: paper timer, cobalt stopwatch, neutral navigation. */
+.remaining,.running .remaining,.finished .remaining{background:none;border:0;box-shadow:none;transform:none;text-align:center;color:var(--ink);width:100%}
+.remaining span{display:block;font-size:12px;font-weight:800;margin-bottom:5px}.remaining output{display:block;font-size:clamp(28px,8cqw,35px);font-weight:800;letter-spacing:-1.5px;font-variant-numeric:tabular-nums}
+.timer-control,.running .timer-control{background:var(--yellow);font-size:16px;width:112px;min-width:0;z-index:4}
+.timer-reset{position:absolute;top:calc(50% + 26px);left:50%;transform:translateX(-50%) rotate(2deg);width:86px;min-height:44px;border:3px solid var(--ink);background:#f3f0e6;color:var(--ink);box-shadow:3px 3px var(--ink);font-weight:800;font-size:13px;z-index:3;animation:reveal-reset 130ms steps(3)}
+@keyframes reveal-reset{from{translate:0 -25px}to{translate:0 0}}
+.total{background:var(--yellow)}.total:has(input:disabled){background:var(--paper)}
+.crono-label{inset:auto;top:16%;left:6%;width:auto;height:auto;font-size:clamp(37px,11.5cqw,49px);letter-spacing:1px;line-height:1;color:var(--yellow);transform:rotate(-29deg);transform-origin:center}
+.control-card{clip-path:polygon(16% 0,84% 0,100% 20%,96% 79%,80% 100%,17% 96%,0 78%,3% 19%);border:0;box-shadow:none;width:69px;min-height:56px;transform:rotate(-3deg)}
+.small-hole:not(.primary) .control-card{width:59px;min-height:48px}
+header .back{background:#f3f0e6;clip-path:polygon(0 50%,34% 0,34% 18%,100% 18%,100% 82%,34% 82%,34% 100%);border:0;width:55px;height:52px;padding:0;color:var(--ink)}
+.back-card{background:none;box-shadow:none;border:0;width:100%;height:100%;font-size:32px;padding-left:9px}
+.delete-badge{left:auto;right:-9px}
+.main-badge{position:static;align-self:flex-start;margin-top:5px!important;padding:3px 5px;font-size:10px!important}.clock-tile strong{font-size:26px}.clock-tile>.pixels{max-height:132px;margin-bottom:10px}
+.timer button:focus-visible,.timer input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;box-shadow:0 0 0 6px var(--yellow)}
+/* Fit the whole world-clock group inside the paper's black opening at any aspect ratio. */
+.world-preview{height:calc(29% - 14px);aspect-ratio:auto;min-height:0}
+.world-preview>.pixels{flex:1 1 0;min-height:0;height:0;width:86%;margin:0 auto 9px}
+.world-preview>strong,.world-preview>span:not(.sr-only){flex:0 0 auto}
+/* Persistent reset tab retracts behind the primary button before becoming hidden. */
+.timer-reset{animation:none;transform:translate(-50%,-54px) rotate(2deg);visibility:hidden;pointer-events:none;transition:transform 160ms steps(4),visibility 0s linear 160ms}
+.timer-reset.is-open{transform:translate(-50%,0) rotate(2deg);visibility:visible;pointer-events:auto;transition:transform 160ms steps(4),visibility 0s}
+.timer-reset:disabled{color:var(--ink);opacity:1}
+.falling-sand{animation:sand-fall 360ms linear infinite}
+@keyframes sand-fall{from{transform:translateY(0)}to{transform:translateY(12px)}}
+@media(prefers-reduced-motion:reduce){.timer-reset{transition:none}.falling-sand{animation:none}}
+/* TOTAL: the editable paper stamp lifts away to leave actual unframed text. */
+.total,.total:has(input:disabled){position:relative;isolation:isolate;border:0;background:none;box-shadow:none;padding:3px;transform:none}
+.total::before{content:"";position:absolute;inset:0;border:3px solid var(--ink);background:var(--yellow);box-shadow:5px 5px 0 var(--ink);z-index:-1;transform-origin:50% 80%;pointer-events:none}
+.total.is-editable::before{animation:total-stamp-in 210ms steps(4) both}
+.total.is-locked::before{animation:total-stamp-out 180ms steps(4) both}
+.total>span{border:0;padding:5px 0;position:relative}
+.total.is-editable>span::after{content:"";position:absolute;bottom:0;left:0;right:0;border-bottom:2px solid var(--ink)}
+.total output,.total input{height:52px;min-height:52px;padding:7px 0;line-height:38px}
+.total.is-editable input{animation:total-ink-stamp 210ms steps(4) both}
+@keyframes total-stamp-in{0%{opacity:0;transform:translate(4px,-14px) rotate(-7deg) scale(1.12)}35%{opacity:1;transform:translate(3px,-10px) rotate(-5deg) scale(1.08)}70%{opacity:1;transform:translate(2px,3px) rotate(-2deg) scale(.98);box-shadow:1px 1px 0 var(--ink)}100%{opacity:1;transform:rotate(-3deg);box-shadow:5px 5px 0 var(--ink)}}
+@keyframes total-stamp-out{0%{opacity:1;transform:rotate(-3deg)}35%{opacity:1;transform:translate(1px,2px) rotate(-2deg) scale(.98);box-shadow:1px 1px 0 var(--ink)}75%{opacity:1;transform:translate(4px,-12px) rotate(-7deg) scale(1.08);box-shadow:8px 8px 0 var(--ink)}100%{opacity:0;transform:translate(6px,-19px) rotate(-9deg) scale(1.12)}}
+@keyframes total-ink-stamp{0%,35%{transform:translateY(-3px)}70%{transform:translateY(2px)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){.total.is-locked::before{opacity:0}.total.is-editable::before{opacity:1;transform:rotate(-3deg)}}
+.pause-icon{display:inline-flex;align-items:center;justify-content:center;gap:5px;width:23px;height:23px;vertical-align:middle}.pause-icon i{display:block;width:6px;height:19px;background:currentColor}
+/* Stopwatch RESET: paper closes over the complete opening; reveal precedes stamping. */
+.reset-cutout{width:101px;height:83px;flex-shrink:0;visibility:hidden;pointer-events:none;clip-path:polygon(0 48%,20% 48%,40% 48%,60% 48%,80% 48%,100% 48%,100% 48%,80% 48%,60% 48%,40% 48%,20% 48%,0 48%);transition:clip-path 180ms steps(4),visibility 0s linear 180ms}
+.reset-cutout.is-open{visibility:visible;pointer-events:auto;clip-path:polygon(0 0,20% 0,40% 0,60% 0,80% 0,100% 0,100% 100%,80% 100%,60% 100%,40% 100%,20% 100%,0 100%);transition:clip-path 140ms steps(3),visibility 0s}
+.reset-cutout .small-hole{width:100%;height:100%;margin:0}.reset-cutout .small-hole:disabled{opacity:1}
+.reset-cutout.is-open .control-card{animation:total-stamp-in 210ms steps(4) 140ms both}
+@media(prefers-reduced-motion:reduce){.reset-cutout{transition:none}.reset-cutout.is-open .control-card{animation:none}}
+/* Exit: split the cyan token, drop both halves, close the cobalt opening behind them. */
+.reset-cutout{clip-path:none;overflow:visible;visibility:hidden;transition:visibility 0s linear 420ms;position:relative}
+.reset-cutout.is-open{clip-path:none;visibility:visible;transition:none}
+.reset-cutout.is-breaking{visibility:visible}
+.reset-cutout>.small-hole{transform:scale(0);transform-origin:center;transition:transform 180ms steps(4);visibility:hidden}
+.reset-cutout.is-open>.small-hole{transform:scale(1);visibility:visible;transition:transform 140ms steps(3)}
+.reset-cutout.is-breaking>.small-hole{visibility:visible}
+.reset-cutout:not(.is-open)>.small-hole>.control-card{visibility:hidden}
+.reset-fragments{position:absolute;inset:0;pointer-events:none}
+.reset-fragment{position:absolute;left:21px;top:17px;width:59px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--action);color:var(--ink);font-weight:800;transform:rotate(-3deg)}
+.reset-fragment b{font-size:23px;line-height:1.1}.reset-fragment>span{font-size:11px}
+.fragment-left{clip-path:polygon(16% 0,51% 0,47% 17%,55% 32%,46% 49%,53% 65%,47% 82%,51% 98%,17% 96%,0 78%,3% 19%);animation:fragment-fall-left 400ms cubic-bezier(.45,0,1,.6) both}
+.fragment-right{clip-path:polygon(51% 0,84% 0,100% 20%,96% 79%,80% 100%,51% 98%,47% 82%,53% 65%,46% 49%,55% 32%,47% 17%);animation:fragment-fall-right 400ms cubic-bezier(.45,0,1,.6) both}
+@keyframes fragment-fall-left{0%{transform:translate(0,0) rotate(-3deg);opacity:1}75%{opacity:1}100%{transform:translate(-29px,84px) rotate(-32deg);opacity:0}}
+@keyframes fragment-fall-right{0%{transform:translate(0,0) rotate(-3deg);opacity:1}75%{opacity:1}100%{transform:translate(27px,93px) rotate(29deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.reset-cutout,.reset-cutout>.small-hole{transition:none}.reset-fragments{display:none}.reset-cutout.is-breaking:not(.is-open){visibility:hidden}}
+
+/* Correct ownership: timer card breaks; stopwatch hole closes radially as one piece. */
+.timer-reset:not(.is-open){transition:none;visibility:hidden}
+.timer-reset-fragments{position:absolute;top:calc(50% + 26px);left:50%;width:86px;height:44px;transform:translateX(-50%) rotate(2deg);pointer-events:none;z-index:3}
+.timer-reset-fragments .reset-fragment{left:0;top:0;width:86px;height:44px;background:#f3f0e6;border:3px solid var(--ink);box-shadow:3px 3px var(--ink);font-size:13px}
+.timer-reset-fragments .fragment-left{clip-path:polygon(0 0,51% 0,47% 17%,55% 32%,46% 49%,53% 65%,47% 82%,51% 100%,0 100%)}
+.timer-reset-fragments .fragment-right{clip-path:polygon(51% 0,100% 0,100% 100%,51% 100%,47% 82%,53% 65%,46% 49%,55% 32%,47% 17%)}
+.reset-cutout{transition:visibility 0s linear 180ms}.reset-cutout>.small-hole{visibility:visible}
+.reset-cutout:not(.is-open)>.small-hole>.control-card{visibility:visible}
+@media(prefers-reduced-motion:reduce){.timer-reset-fragments{display:none}.reset-cutout{transition:none}}
+/* Final animation ownership: TOTAL splits; timer RESET retracts. */
+.timer-reset:not(.is-open){transition:transform 160ms steps(4),visibility 0s linear 160ms;visibility:hidden}
+.total.is-locked::before{animation:none;opacity:0}
+.total-fragments{position:absolute;inset:0;pointer-events:none;z-index:4;transform:rotate(-3deg)}
+.total-fragments .reset-fragment{inset:0;width:100%;height:100%;background:var(--yellow);border:3px solid var(--ink);box-shadow:5px 5px var(--ink);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start}
+.total-fragments .fragment-left{clip-path:polygon(0 0,51% 0,47% 17%,55% 32%,46% 49%,53% 65%,47% 82%,51% 100%,0 100%)}
+.total-fragments .fragment-right{clip-path:polygon(51% 0,100% 0,100% 100%,51% 100%,47% 82%,53% 65%,46% 49%,55% 32%,47% 17%)}
+.total-fragments .fragment-total-label{display:block;width:100%;font-size:12px;letter-spacing:-.7px;padding:5px 0;border-bottom:2px solid var(--ink);line-height:normal}
+.total-fragments .fragment-total-value{font-size:clamp(26px,7.4cqw,32px);font-weight:800;letter-spacing:-1.5px;line-height:38px;padding:7px 0}
+@media(prefers-reduced-motion:reduce){.total-fragments{display:none}.timer-reset:not(.is-open){transition:none}}
+
+/* Tactile motion: the hourglass carries physical sand; stopwatch ink wobbles and its controls twist in place. */
+.hourglass{transform-origin:50% 50%;touch-action:manipulation}
+.torn-hole{touch-action:manipulation}
+@keyframes glass-wobble-right{0%,100%{rotate:0deg}26%{rotate:4.5deg}62%{rotate:-2.2deg}}
+@keyframes glass-wobble-left{0%,100%{rotate:0deg}26%{rotate:-4.5deg}62%{rotate:2.2deg}}
+.hourglass.wobble-right{animation:glass-wobble-right 230ms cubic-bezier(.2,.9,.35,1)}
+.hourglass.wobble-left{animation:glass-wobble-left 230ms cubic-bezier(.2,.9,.35,1)}
+@keyframes ink-wobble-right{0%,100%{rotate:0deg}30%{rotate:3.8deg}68%{rotate:-1.8deg}}
+@keyframes ink-wobble-left{0%,100%{rotate:0deg}30%{rotate:-3.8deg}68%{rotate:1.8deg}}
+.torn-hole output.ink-wobble-right{animation:ink-wobble-right 220ms cubic-bezier(.2,.9,.35,1)}
+.torn-hole output.ink-wobble-left{animation:ink-wobble-left 220ms cubic-bezier(.2,.9,.35,1)}
+
+/* Active REMAINING becomes the yellow adjustable stamp; its label stays plain paper ink. */
+.remaining-number{position:relative;width:100%;min-height:47px;display:grid;place-items:center}
+.remaining-card{width:112px;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transform:rotate(-2deg);animation:total-stamp-in 210ms steps(4) both;position:relative;z-index:2}
+.remaining-card input{display:block;width:100%;height:44px;padding:4px 0;background:transparent;border:0;border-radius:0;color:var(--ink);text-align:center;font-size:clamp(25px,7.4cqw,31px);font-weight:800;letter-spacing:-1.5px;font-variant-numeric:tabular-nums}
+.remaining-card input:focus-visible{outline:0;box-shadow:inset 0 -4px 0 var(--ink)}
+.remaining-fragments{position:absolute;inset:0;z-index:5;pointer-events:none;transform:rotate(-2deg)}
+.remaining-fragments i{position:absolute;left:50%;top:0;width:112px;height:50px;margin-left:-56px;display:grid;place-items:center;background:var(--yellow);border:3px solid var(--ink);box-shadow:4px 4px var(--ink);font-style:normal;font-size:clamp(25px,7.4cqw,31px);font-weight:800;letter-spacing:-1.5px}
+.remaining-fragments i:first-child{clip-path:polygon(0 0,51% 0,47% 17%,55% 32%,46% 49%,53% 65%,47% 82%,51% 100%,0 100%);animation:fragment-fall-left 400ms cubic-bezier(.45,0,1,.6) both}
+.remaining-fragments i:last-child{clip-path:polygon(51% 0,100% 0,100% 100%,51% 100%,47% 82%,53% 65%,46% 49%,55% 32%,47% 17%);animation:fragment-fall-right 400ms cubic-bezier(.45,0,1,.6) both}
+.remaining.is-active output{display:none}
+
+/* Direct per-clock removal and a strong diagonal selection mark for batch deletion. */
+.delete-badge{width:31px;height:29px;top:-6px;right:-6px;padding:5px;border-width:2px;box-shadow:2px 2px var(--paper)}
+.delete-badge:disabled{opacity:.38;cursor:default}
+.remove-label{top:50%;left:50%;right:auto;width:170%;height:42px;transform:translate(-50%,-50%) rotate(55deg);writing-mode:horizontal-tb;text-orientation:mixed;letter-spacing:3px;background:#050505;color:var(--clock-bg);padding:0;display:flex;align-items:center;justify-content:center;font-size:18px;border:0}
+
+/* Fixed iPhone 17 canvas: 1206 × 2622 physical pixels represented at 402 × 874 logical points. */
+body{padding:0!important;min-height:100dvh;overflow:auto;background:#703cff}
+.device-workbench{position:relative;min-width:100%;min-height:100dvh;display:flex;justify-content:center;align-items:flex-start;padding:68px 20px 42px;background:#703cff}
+.device-stage{position:relative;width:calc(438px * var(--device-zoom));height:calc(916px * var(--device-zoom));flex:0 0 auto}
+.device-shell{position:absolute;left:0;top:0;width:438px;height:916px;transform:scale(var(--device-zoom));transform-origin:top left;border-radius:64px;background:#202020;box-shadow:11px 13px 0 #050505;border:3px solid #050505;isolation:isolate}
+.device-shell::before{content:"";position:absolute;inset:7px;border:3px solid #4a4a4a;border-radius:57px;opacity:1;pointer-events:none}
+.device-screen{position:absolute;left:16px;top:19px;width:402px;height:874px;border-radius:49px;background:linear-gradient(90deg,#050505 0 60.9%,var(--paper) 60.9%);overflow:hidden;box-shadow:inset 0 0 0 2px #050505;z-index:2}
+.device-screen:has(>.app.world),.device-screen:has(>.app.add){background:var(--ink)}
+.device-screen>.app{width:402px;max-width:none;height:840px;min-height:840px;max-height:840px;margin:34px 0 0;overflow-y:auto;scrollbar-width:none}
+.device-screen>.app::-webkit-scrollbar{display:none}
+.device-screen>.home{height:840px;min-height:840px;max-height:840px;overflow:hidden}
+.dynamic-island{position:absolute;z-index:30;top:11px;left:50%;width:126px;height:35px;transform:translateX(-50%);border-radius:22px;background:#020202;box-shadow:0 1px 2px #ffffff24,inset 0 0 0 1px #151515;pointer-events:none}
+.dynamic-island i{position:absolute;right:13px;top:10px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#183b6d 0 13%,#07152a 38%,#010205 70%);box-shadow:0 0 4px #315f9b77}
+.dynamic-island b{position:absolute;left:18px;top:14px;width:48px;height:5px;border-radius:3px;background:#090909}
+.home-indicator{position:absolute;z-index:30;bottom:7px;left:50%;width:132px;height:5px;transform:translateX(-50%);border-radius:5px;background:#050505;box-shadow:0 0 0 1px #ffffff38;pointer-events:none}
+.side-button{position:absolute;display:block;background:#111;border:2px solid #050505;border-radius:3px 0 0 3px;z-index:-1}
+.side-button.silent{left:-5px;top:139px;width:6px;height:34px}.side-button.volume-up{left:-5px;top:194px;width:6px;height:67px}.side-button.volume-down{left:-5px;top:275px;width:6px;height:67px}.side-button.power{right:-5px;top:211px;width:6px;height:102px;border-radius:0 3px 3px 0}
+.zoom-controls{position:fixed;right:16px;top:16px;z-index:100;display:flex;align-items:center;background:#050505;color:#fff;border:3px solid #050505;box-shadow:4px 4px 0 #ff5286}
+.zoom-controls button{width:42px;height:38px;background:var(--yellow);color:#050505;font-size:24px;font-weight:800;line-height:1}.zoom-controls output{min-width:58px;text-align:center;font-size:12px;font-weight:800}.zoom-controls button:active{translate:2px 2px}
+@media(max-width:520px){.device-workbench{padding-left:8px;padding-right:8px}.zoom-controls{top:auto;bottom:14px;right:14px}}
+@media(prefers-reduced-motion:reduce){.remaining-card{animation:none}.remaining-fragments{display:none}}
+
+/* Extra optical clearance below Dynamic Island, led by the digital clock. */
+.device-screen .world-preview{top:4.5%}
+.device-screen .stopwatch{top:calc(var(--timer-center,52dvh) - 28.92157cqw + 50px)}
+
+/* Stopwatch state transition: one persistent primary control moves left as RESET opens right. */
+.stopwatch-controls{position:relative;display:block;width:100%;height:83px;padding:0}
+.stopwatch-controls>.small-hole.primary{position:absolute;top:0;left:50%;transform:translateX(-50%) rotate(2deg)}
+.stopwatch.paused .stopwatch-controls>.small-hole.primary{left:calc(100% - 101px);transform:translateX(0) rotate(2deg);animation:primary-close-open-right 300ms steps(5) both}
+.stopwatch.resumed .stopwatch-controls>.small-hole.primary{left:50%;transform:translateX(-50%) rotate(2deg);animation:primary-close-open-center 300ms steps(5) both}
+.stopwatch-controls>.reset-cutout{position:absolute;top:0;left:0;right:auto}
+.stopwatch-controls>.reset-cutout .control-card{background:#f3f0e6;color:var(--ink)}
+.stopwatch.paused .stopwatch-controls>.small-hole.primary .control-card>span:last-child{font-size:0}
+.stopwatch.paused .stopwatch-controls>.small-hole.primary .control-card>span:last-child::after{content:"CONTINUE";font-size:10px;letter-spacing:-.6px}
+@keyframes primary-close-open-right{0%{left:50%;transform:translateX(-50%) rotate(2deg) scale(1)}42%{left:50%;transform:translateX(-50%) rotate(2deg) scale(0)}43%{left:calc(100% - 101px);transform:translateX(0) rotate(2deg) scale(0)}100%{left:calc(100% - 101px);transform:translateX(0) rotate(2deg) scale(1)}}
+@keyframes primary-close-open-center{0%{left:calc(100% - 101px);transform:translateX(0) rotate(2deg) scale(1)}42%{left:calc(100% - 101px);transform:translateX(0) rotate(2deg) scale(0)}43%{left:50%;transform:translateX(-50%) rotate(2deg) scale(0)}100%{left:50%;transform:translateX(-50%) rotate(2deg) scale(1)}}
+@media(prefers-reduced-motion:reduce){.stopwatch.paused .stopwatch-controls>.small-hole.primary,.stopwatch.resumed .stopwatch-controls>.small-hole.primary{animation:none}}
+
+/* Paired cutouts share one radial timeline; neither opens as a vertical wipe. */
+@keyframes paired-cutout-open{0%,42%{transform:scale(0)}100%{transform:scale(1)}}
+@keyframes paired-cutout-close{0%{transform:scale(1)}100%{transform:scale(0)}}
+.stopwatch.paused:not(.resetting) .reset-cutout.is-open>.small-hole{visibility:visible;animation:paired-cutout-open 300ms steps(5) both;transition:none}
+.stopwatch.resumed .reset-cutout>.small-hole{animation:paired-cutout-close 126ms steps(3) both;transition:none}
+.stopwatch.resetting .stopwatch-controls>.small-hole.primary{left:50%;transform:translateX(-50%) rotate(2deg);animation:primary-close-open-center 300ms steps(5) both}
+.stopwatch.resetting .reset-cutout.is-open>.small-hole{visibility:visible;animation:paired-cutout-close 126ms steps(3) both;transition:none}
+@media(prefers-reduced-motion:reduce){.stopwatch.paused .reset-cutout.is-open>.small-hole,.stopwatch.resumed .reset-cutout>.small-hole,.stopwatch.resetting .stopwatch-controls>.small-hole.primary,.stopwatch.resetting .reset-cutout.is-open>.small-hole{animation:none}}
+
+/* Editable timer digits lift on entry and press back into the paper on commit. */
+@keyframes digits-engage{0%,100%{transform:none;letter-spacing:-1.5px}38%{transform:translateY(-3px) scale(1.08) rotate(-1deg);letter-spacing:-.5px}72%{transform:translateY(1px) scale(.98) rotate(.5deg);letter-spacing:-1.8px}}
+@keyframes digits-commit{0%,100%{transform:none}35%{transform:translate(2px,3px) scale(.94) rotate(1deg)}68%{transform:translate(-1px,-1px) scale(1.025) rotate(-.5deg)}}
+.total.is-editable input.time-input.digits-engage,.remaining-card input.time-input.digits-engage{animation:digits-engage 190ms steps(4)}
+.total.is-editable input.time-input.digits-commit,.remaining-card input.time-input.digits-commit{animation:digits-commit 210ms steps(4)}
+@media(prefers-reduced-motion:reduce){.time-input.digits-engage,.time-input.digits-commit{animation:none!important}}
+
+/* Recessed neobrutalist cutouts: a solid, unblurred inner shadow sits on the
+   upper-left edge. This reverses the raised-card lighting used elsewhere. */
+.torn-hole,.small-hole,header .back{background:var(--ink);isolation:isolate;overflow:hidden}
+.torn-hole::before,.small-hole::before,header .back::before{content:"";position:absolute;inset:0;background:var(--cutout);clip-path:inherit;transform:translate(6px,6px);z-index:-1;pointer-events:none}
+.small-hole::before{transform:translate(5px,5px)}
+header .back::before{transform:translate(4px,4px)}
+.stopwatch-controls>.small-hole.primary,.stopwatch.running .stopwatch-controls>.small-hole.primary{background:var(--ink)}
+
+/* The card and its shadow are separate silhouettes. Keeping the shadow out of
+   the clipped card makes its hard 5 px offset visible against every cutout. */
+.control-card-depth{position:relative;display:grid;place-items:center;width:69px;min-height:56px;transform:rotate(-3deg);isolation:isolate;box-shadow:none!important}
+.control-card-depth::before{content:"";position:absolute;inset:0;background:var(--ink);clip-path:polygon(16% 0,84% 0,100% 20%,96% 79%,80% 100%,17% 96%,0 78%,3% 19%);transform:translate(5px,5px);z-index:0;pointer-events:none}
+.control-card-depth .control-card{position:relative;z-index:1;width:100%;height:100%;min-height:inherit;transform:none;filter:none}
+.small-hole:not(.primary) .control-card-depth{width:59px;min-height:48px}
+.stopwatch-controls .small-hole:active .control-card-depth{translate:3px 3px}
+.stopwatch-controls .small-hole:active .control-card-depth::before{transform:translate(2px,2px)}
+.stopwatch-controls .small-hole:active .control-card{translate:0}
+.reset-cutout.is-open .control-card{animation:none}
+.reset-cutout.is-open .control-card-depth{animation:total-stamp-in 210ms steps(4) 140ms both}
