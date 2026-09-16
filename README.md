@@ -1,56 +1,48 @@
 # CRONO
 
-Prototipo móvil de reloj mundial, temporizador y cronómetro construido con React, TypeScript y Vite. La interfaz aplica una dirección neobrutalista mediante colores planos y saturados, contornos gruesos, sombras duras, tipografía monoespaciada y una composición de papel recortado.
+Mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
 
-En escritorio y tablet se presenta dentro de un lienzo de iPhone con zoom. En teléfonos reales, la interfaz ocupa directamente toda la pantalla, respeta las zonas seguras del dispositivo y conserva su composición vertical al girar el teléfono.
+On desktop and tablet, CRONO is presented inside an iPhone canvas with zoom controls. On real phones, the interface fills the screen directly, respects device safe areas, and preserves its vertical composition when the phone rotates.
 
-**[Abrir la demostración interactiva](https://r3neer.github.io/crono-neobrutal/)**
+**[Open the interactive demo](https://r3neer.github.io/crono-neobrutal/)**
 
-## Demostraciones
+## Demos
 
-### Tiempo, físicas y respuesta
+### Time, physics, and interaction
+![Ten-second timer, physical sand, and stopwatch controls](./public/demos/01-time-and-physics.gif)
 
-![Temporizador de diez segundos, arena física y controles del cronómetro](./public/demos/01-time-and-physics.gif)
+### World clocks and palettes
+![World-clock selection, deletion, search, and palettes](./public/demos/02-world-palettes.gif)
 
-### Relojes mundiales y paletas
-
-![Selección, eliminación, búsqueda y paletas de relojes mundiales](./public/demos/02-world-palettes.gif)
-
-## Ejecutar localmente
+## Run locally
 
 ```powershell
 npm install
 npm run dev -- --port 5173
 ```
 
-Abre `http://127.0.0.1:5173/`. Para comprobar la versión de producción:
+Open `http://127.0.0.1:5173/`. To verify the production build:
 
 ```powershell
 npm run build
 npm run preview
 ```
 
-## Regenerar los GIF
+## Regenerate the GIFs
 
-Con el servidor local abierto en el puerto `5173`:
+With the local server running on port `5173`, run `npm run capture:demos`. The script captures the flows in Microsoft Edge and writes the final GIFs to `public/demos/`. Intermediate frames are stored under `artifacts/demo-frames/` and excluded from the repository.
 
-```powershell
-npm run capture:demos
-```
+## Structure
 
-El script captura los recorridos en Microsoft Edge y escribe los GIF finales en `public/demos/`. Los fotogramas intermedios se guardan bajo `artifacts/demo-frames/` y están excluidos del repositorio.
+- `src/main.tsx`: digital clocks, timer, sand physics, stopwatch, and city management.
+- `src/style.css`: iPhone canvas, collage composition, cutouts, shadows, palettes, and animations.
+- `public/demos/`: animated demos used by this README.
+- `scripts/capture-demos.cjs`: reproducible Playwright demo flows.
+- `scripts/build-gifs.py`: shared palette generation and frame packaging.
+- `DESIGN.md`: original brief and subsequent design decisions.
 
-## Estructura
+## Scope
 
-- `src/main.tsx`: relojes digitales, temporizador, físicas de arena, cronómetro y gestión de ciudades.
-- `src/style.css`: lienzo de iPhone, collage, recortes, sombras, paletas y animaciones.
-- `public/demos/`: demostraciones animadas listas para el README.
-- `scripts/capture-demos.cjs`: recorridos reproducibles con Playwright.
-- `scripts/build-gifs.py`: paleta compartida y empaquetado de fotogramas.
-- `DESIGN.md`: brief original y decisiones de diseño posteriores.
+Selected cities and the main clock are stored in `localStorage`. Active timers survive internal navigation, but not a browser reload. World clocks use real IANA time zones. There is no backend, background alarm, or sound.
 
-## Alcance
-
-Las ciudades y el reloj principal se guardan en `localStorage`. Los temporizadores activos sobreviven a la navegación interna, pero no a una recarga del navegador. Los relojes mundiales utilizan zonas IANA reales. No existe backend, alarma en segundo plano ni sonido.
-
-JetBrains Mono se incluye localmente con su licencia OFL. Impact usa la fuente del sistema con una alternativa condensada.
+JetBrains Mono is bundled locally under its OFL license. Impact uses the system font with a condensed fallback.

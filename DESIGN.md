@@ -74,3 +74,6 @@ TOTAL is the only card that splits into two falling fragments when locking into 
 All four digit positions persist throughout editing: clearing a selection or deleting a digit writes zeros into those slots rather than removing characters. Typing overwrites slots and skips the colon automatically. Keyboard, beforeinput/mobile and paste paths share the same positional edit handler. Clearing everything remains 00:00 even on blur; it no longer resets to 05:00. Seconds above 59 are capped on blur.
 
 Seconds overflow now carries into minutes on blur (01:75 -> 02:15), rather than clamping the seconds field. The fixed two-digit minute format caps the total at 99:59.
+
+## Continue reset-retraction hotfix
+When the timer is paused, pressing CONTINUE starts retracting the RESET tab on pointer-down instead of waiting for the resume state update. Retraction is component state, so unrelated timer renders cannot reopen the tab between pointer-down and click. The countdown still resumes on normal activation, preserving keyboard semantics while pointer input receives immediate visual feedback.
