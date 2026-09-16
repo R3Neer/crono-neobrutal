@@ -221,3 +221,14 @@ header .back::before{transform:translate(4px,4px)}
 .stopwatch-controls .small-hole:active .control-card{translate:0}
 .reset-cutout.is-open .control-card{animation:none}
 .reset-cutout.is-open .control-card-depth{animation:total-stamp-in 210ms steps(4) 140ms both}
+
+/* Real phones use the interface directly. Desktop and tablet browsers retain
+   the fixed iPhone presentation canvas, including its zoom controls. */
+body:has(.mobile-handset){overflow:hidden;background:var(--ink)}
+.device-workbench.mobile-handset{display:block;width:100%;min-width:0;min-height:100dvh;height:100dvh;padding:0;background:var(--ink);overflow:hidden}
+.mobile-handset .zoom-controls,.mobile-handset .dynamic-island,.mobile-handset .home-indicator,.mobile-handset .side-button,.mobile-handset .device-shell::before{display:none}
+.mobile-handset .device-stage{position:relative;width:100%;height:100dvh}
+.mobile-handset .device-shell{position:relative;inset:auto;width:100%;height:100dvh;transform:none;border:0;border-radius:0;background:transparent;box-shadow:none}
+.mobile-handset .device-screen{position:relative;inset:auto;width:100%;height:100dvh;border-radius:0;box-shadow:none}
+.mobile-handset .device-screen>.app{width:100%;max-width:none;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:0;max-height:none;margin:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.mobile-handset .device-screen>.home{height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:0;max-height:none}

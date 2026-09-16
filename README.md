@@ -2,6 +2,8 @@
 
 Prototipo móvil de reloj mundial, temporizador y cronómetro construido con React, TypeScript y Vite. La interfaz aplica una dirección neobrutalista mediante colores planos y saturados, contornos gruesos, sombras duras, tipografía monoespaciada y una composición de papel recortado.
 
+En escritorio y tablet se presenta dentro de un lienzo de iPhone con zoom. En teléfonos reales, la interfaz ocupa directamente toda la pantalla y respeta las zonas seguras del dispositivo.
+
 **[Abrir la demostración interactiva](https://r3neer.github.io/crono-neobrutal/)**
 
 ## Demostraciones
