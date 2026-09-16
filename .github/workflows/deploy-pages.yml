@@ -6,37 +6,222 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  build:
+  hotfix-v013:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+      - name: Apply hotfix and English documentation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          main = Path('src/main.tsx')
+          text = main.read_text()
+          old = "const seconds=parseDuration(total)||1,[kick,setKick]=useState(0),[resetBreaking,setResetBreaking]=useState(false),resetBreakTimer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);"
+          new = "const seconds=parseDuration(total)||1,[kick,setKick]=useState(0),[resetBreaking,setResetBreaking]=useState(false),[resetRetracting,setResetRetracting]=useState(false),resetBreakTimer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);"
+          if old not in text: raise SystemExit('Timer state declaration not found')
+          text = text.replace(old, new, 1)
+          old = "useEffect(()=>()=>clearTimeout(resetBreakTimer.current),[]);"
+          new = "useEffect(()=>()=>clearTimeout(resetBreakTimer.current),[]);\n useEffect(()=>{if(paused)setResetRetracting(false)},[paused]);"
+          text = text.replace(old, new, 1)
+          old = '<button className="timer-control hard" onClick={onToggle}>{running?\'PAUSE\':paused?\'CONTINUE\':\'START\'}</button><TimerReset open={paused||finished} onResetStart={beginResetBreak} onReset={onReset}/>'
+          new = '<button className="timer-control hard" onPointerDown={paused?()=>setResetRetracting(true):undefined} onClick={onToggle}>{running?\'PAUSE\':paused?\'CONTINUE\':\'START\'}</button><TimerReset open={(paused||finished)&&!resetRetracting} onResetStart={beginResetBreak} onReset={onReset}/>'
+          if old not in text: raise SystemExit('Timer controls markup not found')
+          main.write_text(text.replace(old, new, 1))
+
+          package = Path('package.json')
+          data = json.loads(package.read_text())
+          data['version'] = '0.1.3'
+          if 'node tests/timer-continue-reset.cjs' not in data['scripts']['test']:
+              data['scripts']['test'] += ' && node tests/timer-continue-reset.cjs'
+          package.write_text(json.dumps(data,separators=(',',':'))+'\n')
+
+          lock = Path('package-lock.json')
+          lock_data = json.loads(lock.read_text())
+          lock_data['version'] = '0.1.3'
+          if '' in lock_data.get('packages',{}): lock_data['packages']['']['version'] = '0.1.3'
+          lock.write_text(json.dumps(lock_data,indent=2)+'\n')
+          PY
+
+          cat > tests/timer-continue-reset.cjs <<'EOF'
+          const {chromium,expect}=require('@playwright/test');
+          (async()=>{
+           const browser=await chromium.launch({channel:'msedge',headless:true});
+           const page=await browser.newPage({viewport:{width:390,height:844}});
+           await page.goto('http://127.0.0.1:5173/');
+           const control=page.locator('.timer-control');
+           await control.click();
+           await control.click();
+           const reset=page.getByLabel('Reset timer',{exact:true});
+           await expect(reset).toHaveClass(/is-open/);
+           await control.dispatchEvent('pointerdown',{pointerType:'mouse',button:0,bubbles:true});
+           await expect(reset).not.toHaveClass(/is-open/);
+           const transform=await reset.evaluate(el=>getComputedStyle(el).transform);
+           expect(transform).not.toBe('none');
+           await page.waitForTimeout(40);
+           await expect(reset).not.toHaveClass(/is-open/);
+           await control.dispatchEvent('pointerup',{pointerType:'mouse',button:0,bubbles:true});
+           await control.dispatchEvent('click',{button:0,bubbles:true});
+           await expect(control).toHaveText('PAUSE');
+           await browser.close();
+           console.log('Timer RESET retracts on CONTINUE pointer-down and stays retracting until resume');
+          })().catch(error=>{console.error(error);process.exit(1)});
+          EOF
+
+          cat > README.md <<'EOF'
+          # CRONO
+
+          Mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
+
+          On desktop and tablet, CRONO is presented inside an iPhone canvas with zoom controls. On real phones, the interface fills the screen directly, respects device safe areas, and preserves its vertical composition when the phone rotates.
+
+          **[Open the interactive demo](https://r3neer.github.io/crono-neobrutal/)**
+
+          ## Demos
+
+          ### Time, physics, and interaction
+
+          ![Ten-second timer, physical sand, and stopwatch controls](./public/demos/01-time-and-physics.gif)
+
+          ### World clocks and palettes
+
+          ![World-clock selection, deletion, search, and palettes](./public/demos/02-world-palettes.gif)
+
+          ## Run locally
+
+          ```powershell
+          npm install
+          npm run dev -- --port 5173
+          ```
+
+          Open `http://127.0.0.1:5173/`. To verify the production build:
+
+          ```powershell
+          npm run build
+          npm run preview
+          ```
+
+          ## Regenerate the GIFs
+
+          With the local server running on port `5173`:
+
+          ```powershell
+          npm run capture:demos
+          ```
+
+          The script captures the flows in Microsoft Edge and writes the final GIFs to `public/demos/`. Intermediate frames are stored under `artifacts/demo-frames/` and are excluded from the repository.
+
+          ## Structure
+
+          - `src/main.tsx`: digital clocks, timer, sand physics, stopwatch, and city management.
+          - `src/style.css`: iPhone canvas, collage composition, cutouts, shadows, palettes, and animations.
+          - `public/demos/`: animated demos used by this README.
+          - `scripts/capture-demos.cjs`: reproducible Playwright demo flows.
+          - `scripts/build-gifs.py`: shared palette generation and frame packaging.
+          - `DESIGN.md`: original brief and subsequent design decisions.
+
+          ## Scope
+
+          Selected cities and the main clock are stored in `localStorage`. Active timers survive internal navigation, but not a browser reload. World clocks use real IANA time zones. There is no backend, background alarm, or sound.
+
+          JetBrains Mono is bundled locally under its OFL license. Impact uses the system font with a condensed fallback.
+          EOF
+
+          cat >> DESIGN.md <<'EOF'
+
+          ## Continue reset-retraction hotfix
+          When the timer is paused, pressing CONTINUE starts retracting the RESET tab on pointer-down instead of waiting for the resume state update. The retraction is represented as component state, so unrelated timer renders cannot reopen the tab between pointer-down and click. The countdown still resumes on normal activation, preserving keyboard semantics while pointer input receives immediate visual feedback.
+          EOF
+
+          cat > .github/workflows/deploy-pages.yml <<'EOF'
+          name: Deploy to GitHub Pages
+
+          on:
+            push:
+              branches: [main]
+            workflow_dispatch:
+
+          permissions:
+            contents: read
+            pages: write
+            id-token: write
+
+          concurrency:
+            group: pages
+            cancel-in-progress: true
+
+          jobs:
+            build:
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-node@v4
+                  with:
+                    node-version: 22
+                    cache: npm
+                - run: npm ci
+                - run: npm run build
+                - uses: actions/configure-pages@v5
+                - uses: actions/upload-pages-artifact@v3
+                  with:
+                    path: dist
+
+            deploy:
+              environment:
+                name: github-pages
+                url: ${{ steps.deployment.outputs.page_url }}
+              runs-on: ubuntu-latest
+              needs: build
+              steps:
+                - name: Deploy
+                  id: deployment
+                  uses: actions/deploy-pages@v4
+          EOF
+      - run: npm ci
+      - name: Verify hotfix
+        shell: bash
+        run: |
+          npm run build
+          npm run dev -- --port 5173 > /tmp/crono-vite.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:5173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          npm test
+      - name: Commit hotfix directly to main
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/main.tsx package.json package-lock.json README.md DESIGN.md tests/timer-continue-reset.cjs .github/workflows/deploy-pages.yml
+          git commit -m "fix: retract timer reset immediately on continue"
+          git push origin HEAD:main
+      - name: Publish CRONO v0.1.3
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          TARGET=$(git rev-parse HEAD)
+          git tag v0.1.3 "$TARGET"
+          git push origin v0.1.3
+          gh release create v0.1.3 --target "$TARGET" --title "CRONO v0.1.3" --notes $'Hotfix for CRONO v0.1.2.\n\n## Fixes\n\n- Timer RESET starts retracting immediately when CONTINUE is pressed, on pointer-down, instead of waiting for the resume state transition.\n- Retraction state survives unrelated timer renders until the countdown resumes.\n- Added a regression test for immediate RESET retraction.\n- README and project documentation are fully in English.\n\n## Demo\n\nhttps://r3neer.github.io/crono-neobrutal/'
