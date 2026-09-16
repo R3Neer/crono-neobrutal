@@ -20,6 +20,26 @@ const {chromium,expect}=require('@playwright/test');
  await expect(phonePage.locator('.back-card')).toHaveCSS('z-index','1');
  await phone.close();
 
+ const landscapePhone=await browser.newContext({
+  viewport:{width:844,height:390},
+  screen:{width:844,height:390},
+  isMobile:true,
+  hasTouch:true,
+  userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1',
+ });
+ const landscapePage=await landscapePhone.newPage();await landscapePage.goto('http://127.0.0.1:5173/');
+ await expect(landscapePage.locator('.device-workbench')).toHaveClass(/mobile-handset/);
+ const landscapeGeometry=await landscapePage.evaluate(()=>{
+  const workbench=document.querySelector('.device-workbench'),screen=document.querySelector('.device-screen'),app=document.querySelector('.app'),rect=workbench.getBoundingClientRect(),screenRect=screen.getBoundingClientRect();
+  return {angle:window.screen.orientation?.angle,rotation:getComputedStyle(workbench).getPropertyValue('--handset-rotation').trim(),workbench:{x:Math.round(rect.x),y:Math.round(rect.y),width:Math.round(rect.width),height:Math.round(rect.height)},screen:{x:Math.round(screenRect.x),y:Math.round(screenRect.y),width:Math.round(screenRect.width),height:Math.round(screenRect.height)},layout:{width:app.offsetWidth,height:app.offsetHeight},overflow:{width:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}};
+ });
+ expect(landscapeGeometry.rotation).toBe(landscapeGeometry.angle===270||landscapeGeometry.angle===-90?'-90deg':'90deg');
+ expect(landscapeGeometry.workbench).toEqual({x:0,y:0,width:844,height:390});
+ expect(landscapeGeometry.screen).toEqual({x:0,y:0,width:844,height:390});
+ expect(landscapeGeometry.layout).toEqual({width:390,height:844});
+ expect(landscapeGeometry.overflow).toEqual({width:844,height:390});
+ await landscapePhone.close();
+
  const desktopModePhone=await browser.newContext({
   viewport:{width:390,height:844},
   screen:{width:390,height:844},
@@ -44,6 +64,6 @@ const {chromium,expect}=require('@playwright/test');
  await expect(tabletPage.locator('.dynamic-island')).toBeVisible();
  await tablet.close();
 
- console.log('Native phone, desktop-mode phone, and framed tablet views verified');
+ console.log('Portrait-locked phone, desktop-mode phone, and framed tablet views verified');
  await browser.close();
 })().catch(error=>{console.error(error);process.exit(1)});

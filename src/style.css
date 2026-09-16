@@ -234,3 +234,10 @@ body:has(.mobile-handset){overflow:hidden;background:var(--ink)}
 .mobile-handset .device-screen{position:relative;inset:auto;width:100%;height:100dvh;border-radius:0;box-shadow:none}
 .mobile-handset .device-screen>.app{width:100%;max-width:none;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:0;max-height:none;margin:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
 .mobile-handset .device-screen>.home{height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:0;max-height:none}
+@media(orientation:landscape){
+ body:has(.mobile-handset){position:fixed;inset:0;width:100%;height:100%;overflow:hidden}
+ .device-workbench.mobile-handset{position:fixed;left:50%;top:50%;width:100dvh;height:100dvw;min-width:0;min-height:0;transform:translate(-50%,-50%) rotate(var(--handset-rotation,-90deg));transform-origin:center}
+ .mobile-handset .device-stage,.mobile-handset .device-shell,.mobile-handset .device-screen{width:100%;height:100%}
+ .mobile-handset .device-screen>.app{height:calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));margin:env(safe-area-inset-left,0px) 0 env(safe-area-inset-right,0px)}
+ .mobile-handset .device-screen>.home{height:calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px))}
+}

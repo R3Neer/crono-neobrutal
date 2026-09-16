@@ -2,7 +2,7 @@
 
 Prototipo móvil de reloj mundial, temporizador y cronómetro construido con React, TypeScript y Vite. La interfaz aplica una dirección neobrutalista mediante colores planos y saturados, contornos gruesos, sombras duras, tipografía monoespaciada y una composición de papel recortado.
 
-En escritorio y tablet se presenta dentro de un lienzo de iPhone con zoom. En teléfonos reales, la interfaz ocupa directamente toda la pantalla y respeta las zonas seguras del dispositivo.
+En escritorio y tablet se presenta dentro de un lienzo de iPhone con zoom. En teléfonos reales, la interfaz ocupa directamente toda la pantalla, respeta las zonas seguras del dispositivo y conserva su composición vertical al girar el teléfono.
 
 **[Abrir la demostración interactiva](https://r3neer.github.io/crono-neobrutal/)**
 
@@ -28,25 +28,6 @@ Abre `http://127.0.0.1:5173/`. Para comprobar la versión de producción:
 ```powershell
 npm run build
 npm run preview
-```
-
-## Publicar con GitHub Pages
-
-El repositorio incluye `.github/workflows/deploy-pages.yml` y usa rutas relativas de Vite, por lo que funciona bajo `https://usuario.github.io/nombre-del-repositorio/`.
-
-1. Crea un repositorio público vacío en GitHub.
-2. Inicializa Git en esta carpeta, añade los archivos, crea el primer commit y sube la rama `main`.
-3. En **Settings → Pages**, selecciona **GitHub Actions** como fuente.
-4. Cada `push` a `main` compilará y publicará automáticamente la carpeta `dist`.
-
-Ejemplo con GitHub CLI, sustituyendo el nombre:
-
-```powershell
-git init
-git add .
-git commit -m "Publish CRONO"
-git branch -M main
-gh repo create crono-neobrutal --public --source . --remote origin --push
 ```
 
 ## Regenerar los GIF
