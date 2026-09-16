@@ -1,0 +1,103 @@
+name: CRONO v0.1.3 reset stutter hotfix
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  hotfix:
+    if: github.actor != 'github-actions[bot]' && github.event.head_commit.message == 'ci: stage reset stutter hotfix'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Apply motion-isolation fix
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          main = Path('src/main.tsx')
+          text = main.read_text()
+          old = "onPointerDown={paused?()=>setResetRetracting(true):undefined} onClick={onToggle}"
+          new = "onPointerDown={paused?e=>{e.stopPropagation();setResetRetracting(true)}:undefined} onClick={onToggle}"
+          if old not in text:
+              raise SystemExit('CONTINUE pointer-down handler not found')
+          main.write_text(text.replace(old, new, 1))
+
+          design = Path('DESIGN.md')
+          design_text = design.read_text()
+          note = "\n\n## Continue reset motion isolation\nCONTINUE now stops its pointer-down event before it reaches the hourglass wobble handler. RESET still begins retracting on pointer-down, but its 160ms slide no longer rides inside the 230ms parent rotation, eliminating the mid-motion micro-stutter. START, PAUSE, direct hourglass presses, and RESET retain their existing tactile wobble behavior."
+          if '## Continue reset motion isolation' not in design_text:
+              design.write_text(design_text.rstrip() + note + '\n')
+          PY
+          cat > tests/timer-continue-reset.cjs <<'EOF'
+          const {chromium,expect}=require('@playwright/test');
+
+          (async()=>{
+           const browser=await chromium.launch({channel:'msedge',headless:true});
+           const page=await browser.newPage({viewport:{width:390,height:844}});
+           await page.goto('http://127.0.0.1:5173/');
+           const control=page.locator('.timer-control');
+           const hourglass=page.locator('.hourglass');
+           await control.click();
+           await control.click();
+           const reset=page.getByLabel('Reset timer',{exact:true});
+           await expect(reset).toHaveClass(/is-open/);
+           await page.waitForTimeout(280);
+           const before=await hourglass.evaluate(el=>el.getAnimations().filter(a=>a.animationName?.startsWith('glass-wobble')).length);
+           expect(before).toBe(0);
+           await control.dispatchEvent('pointerdown',{pointerType:'mouse',button:0,bubbles:true});
+           await expect(reset).not.toHaveClass(/is-open/);
+           const wobbleDuringRetract=await hourglass.evaluate(el=>el.getAnimations().filter(a=>a.animationName?.startsWith('glass-wobble')).length);
+           expect(wobbleDuringRetract).toBe(0);
+           const y1=(await reset.boundingBox()).y;
+           await page.waitForTimeout(80);
+           const y2=(await reset.boundingBox()).y;
+           expect(y2).toBeLessThanOrEqual(y1);
+           await control.dispatchEvent('pointerup',{pointerType:'mouse',button:0,bubbles:true});
+           await control.dispatchEvent('click',{button:0,bubbles:true});
+           await expect(control).toHaveText('PAUSE');
+           await browser.close();
+           console.log('Timer RESET retracts immediately without inheriting the hourglass wobble');
+          })().catch(error=>{console.error(error);process.exit(1)});
+          EOF
+      - run: npm ci
+      - name: Verify hotfix
+        shell: bash
+        run: |
+          npm run build
+          npm run dev -- --port 5173 >/tmp/crono-vite.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID 2>/dev/null || true' EXIT
+          for i in {1..30}; do
+            curl -fsS http://127.0.0.1:5173/ >/dev/null && break || sleep 1
+          done
+          npm test
+      - name: Commit directly to main
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add src/main.tsx tests/timer-continue-reset.cjs DESIGN.md
+          git commit -m "fix: isolate timer reset retraction from hourglass wobble"
+          git push origin HEAD:main
+      - name: Move v0.1.3 to the hotfix commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          TARGET=$(git rev-parse HEAD)
+          git tag -f v0.1.3 "$TARGET"
+          git push origin refs/tags/v0.1.3 --force
+          gh release edit v0.1.3 --title "CRONO v0.1.3" --notes $'Hotfix for CRONO v0.1.2.\n\n## Fixes\n- Timer RESET starts retracting immediately when CONTINUE is pressed.\n- CONTINUE no longer triggers the parent hourglass wobble while RESET retracts, removing the mid-animation micro-stutter.\n- Added regression coverage for immediate, wobble-free RESET retraction.\n- README and project documentation remain fully in English.\n\n## Demo\nhttps://r3neer.github.io/crono-neobrutal/'
+          test "$(git ls-remote origin refs/tags/v0.1.3 | cut -f1)" = "$TARGET"
