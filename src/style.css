@@ -208,6 +208,8 @@ body{padding:0!important;min-height:100dvh;overflow:auto;background:#703cff}
 .torn-hole::before,.small-hole::before,header .back::before{content:"";position:absolute;inset:0;background:var(--cutout);clip-path:inherit;transform:translate(6px,6px);z-index:-1;pointer-events:none}
 .small-hole::before{transform:translate(5px,5px)}
 header .back::before{transform:translate(4px,4px)}
+header .back{position:relative}
+header .back>.back-card{position:relative;z-index:1;width:34px;height:32px;padding-left:3px;background:var(--action);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);color:var(--ink);clip-path:polygon(0 50%,30% 4%,30% 22%,100% 22%,100% 78%,30% 78%,30% 96%)}
 .stopwatch-controls>.small-hole.primary,.stopwatch.running .stopwatch-controls>.small-hole.primary{background:var(--ink)}
 
 /* The card and its shadow are separate silhouettes. Keeping the shadow out of

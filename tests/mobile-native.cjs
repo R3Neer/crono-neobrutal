@@ -15,6 +15,9 @@ const {chromium,expect}=require('@playwright/test');
  const phoneGeometry=await phonePage.evaluate(()=>{const screen=document.querySelector('.device-screen').getBoundingClientRect(),app=document.querySelector('.app').getBoundingClientRect();return {screen:{x:screen.x,y:screen.y,width:screen.width,height:screen.height},app:{x:app.x,width:app.width},viewport:{width:innerWidth,height:innerHeight}}});
  expect(phoneGeometry.screen).toEqual({x:0,y:0,width:390,height:844});
  expect(phoneGeometry.app.x).toBe(0);expect(phoneGeometry.app.width).toBe(390);
+ await phonePage.locator('.world-preview').click();
+ await expect(phonePage.locator('.back-card')).toHaveCSS('background-color','rgb(0, 229, 255)');
+ await expect(phonePage.locator('.back-card')).toHaveCSS('z-index','1');
  await phone.close();
 
  const desktopModePhone=await browser.newContext({
