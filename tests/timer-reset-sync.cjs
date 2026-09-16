@@ -10,10 +10,10 @@ const {chromium,expect}=require('@playwright/test');
  await expect(reset).toBeEnabled();
  await reset.dispatchEvent('pointerdown',{pointerType:'mouse',button:0,bubbles:true});
  await expect(page.locator('.remaining-fragments i')).toHaveCount(2);
- await page.evaluate(()=>new Promise(requestAnimationFrame));
- const timing=await page.evaluate(()=>{
+ const timing=await page.evaluate(async()=>{
   const wobble=document.querySelector('.hourglass').getAnimations().find(animation=>animation.animationName.startsWith('glass-wobble'));
   const fracture=document.querySelector('.remaining-fragments i').getAnimations()[0];
+  await Promise.all([wobble.ready,fracture.ready]);
   return {wobbleStart:wobble?.startTime,fractureStart:fracture?.startTime};
  });
  expect(timing.wobbleStart).not.toBeNull();
