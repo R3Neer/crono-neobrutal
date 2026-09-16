@@ -77,3 +77,6 @@ Seconds overflow now carries into minutes on blur (01:75 -> 02:15), rather than 
 
 ## Continue reset-retraction hotfix
 When the timer is paused, pressing CONTINUE starts retracting the RESET tab on pointer-down instead of waiting for the resume state update. Retraction is component state, so unrelated timer renders cannot reopen the tab between pointer-down and click. The countdown still resumes on normal activation, preserving keyboard semantics while pointer input receives immediate visual feedback.
+
+## Continue reset motion isolation
+CONTINUE now stops its pointer-down event before it reaches the hourglass wobble handler. RESET still begins retracting on pointer-down, but its 160ms slide no longer rides inside the 230ms parent rotation, eliminating the mid-motion micro-stutter. START, PAUSE, direct hourglass presses, and RESET retain their existing tactile wobble behavior.
