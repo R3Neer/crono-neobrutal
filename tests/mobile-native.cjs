@@ -31,12 +31,15 @@ const {chromium,expect}=require('@playwright/test');
  await expect(landscapePage.locator('.device-workbench')).toHaveClass(/mobile-handset/);
  const landscapeGeometry=await landscapePage.evaluate(()=>{
   const workbench=document.querySelector('.device-workbench'),screen=document.querySelector('.device-screen'),app=document.querySelector('.app'),rect=workbench.getBoundingClientRect(),screenRect=screen.getBoundingClientRect();
-  return {angle:window.screen.orientation?.angle,rotation:getComputedStyle(workbench).getPropertyValue('--handset-rotation').trim(),workbench:{x:Math.round(rect.x),y:Math.round(rect.y),width:Math.round(rect.width),height:Math.round(rect.height)},screen:{x:Math.round(screenRect.x),y:Math.round(screenRect.y),width:Math.round(screenRect.width),height:Math.round(screenRect.height)},layout:{width:app.offsetWidth,height:app.offsetHeight},overflow:{width:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}};
+  const world=document.querySelector('.world-preview'),stopwatch=document.querySelector('.stopwatch');
+  return {angle:window.screen.orientation?.angle,rotation:getComputedStyle(workbench).getPropertyValue('--handset-rotation').trim(),workbench:{x:Math.round(rect.x),y:Math.round(rect.y),width:Math.round(rect.width),height:Math.round(rect.height)},screen:{x:Math.round(screenRect.x),y:Math.round(screenRect.y),width:Math.round(screenRect.width),height:Math.round(screenRect.height)},layout:{width:app.offsetWidth,height:app.offsetHeight,worldBottom:world.offsetTop+world.offsetHeight,stopwatchTop:stopwatch.offsetTop},overflow:{width:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}};
  });
  expect(landscapeGeometry.rotation).toBe(landscapeGeometry.angle===270||landscapeGeometry.angle===-90?'-90deg':'90deg');
  expect(landscapeGeometry.workbench).toEqual({x:0,y:0,width:844,height:390});
  expect(landscapeGeometry.screen).toEqual({x:0,y:0,width:844,height:390});
- expect(landscapeGeometry.layout).toEqual({width:390,height:844});
+ expect(landscapeGeometry.layout.width).toBe(390);
+ expect(landscapeGeometry.layout.height).toBe(844);
+ expect(landscapeGeometry.layout.stopwatchTop).toBeGreaterThanOrEqual(landscapeGeometry.layout.worldBottom);
  expect(landscapeGeometry.overflow).toEqual({width:844,height:390});
  await landscapePhone.close();
 
