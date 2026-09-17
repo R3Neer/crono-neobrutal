@@ -1,15 +1,15 @@
-# CHRONO
+# CRONOS
 
-CHRONO is a mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
+CRONOS is a mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
 
-On desktop and tablet, CHRONO is presented inside an iPhone canvas with zoom controls. On real phones, the interface fills the screen directly, respects device safe areas, and preserves its vertical composition when the phone rotates.
+On desktop and tablet, CRONOS is presented inside an iPhone canvas with zoom controls. On real phones, the interface fills the screen directly, respects device safe areas, and preserves its vertical composition when the phone rotates.
 
-**[Open the interactive demo](https://r3neer.github.io/crono-neobrutal/)**
+**[Open the interactive demo](https://r3neer.github.io/cronos/)**
 
 ## Demos
 
 ### Time, physics, and interaction
-![Ten-second timer, physical sand, and the centered CHRONO stopwatch wordmark](./public/demos/01-time-and-physics.gif)
+![Ten-second timer, physical sand, and the centered CRONOS stopwatch wordmark](./public/demos/01-time-and-physics.gif)
 
 ### World clocks and palettes
 ![World-clock selection, deletion, search, and palettes](./public/demos/02-world-palettes.gif)

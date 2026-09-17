@@ -110,7 +110,7 @@ function StopwatchReset({open,onReset}:{open:boolean;onReset:()=>void}){
 }
 function StopwatchFace({elapsed}:{elapsed:number}){
  const [pulse,setPulse]=useState(0);
- return <div className="torn-hole" onPointerDown={()=>setPulse(value=>value+1)}><span className="crono-label" aria-hidden="true">CHRONO</span><output className={pulse?pulse%2?'ink-wobble-right':'ink-wobble-left':''} aria-label="Stopwatch elapsed time">{stopwatch(elapsed)}</output></div>;
+ return <div className="torn-hole" onPointerDown={()=>setPulse(value=>value+1)}><span className="crono-label" aria-hidden="true">CRONOS</span><output className={pulse?pulse%2?'ink-wobble-right':'ink-wobble-left':''} aria-label="Stopwatch elapsed time">{stopwatch(elapsed)}</output></div>;
 }
 function isMobileHandset(){
  const browser=navigator as Navigator&{userAgentData?:{mobile?:boolean}};
