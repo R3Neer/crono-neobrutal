@@ -1,4 +1,4 @@
-# CRONO — design contract
+# CHRONO — design contract
 
 Mobile clock prototype. Reference: IU_2.pdf pp.87–99, especially visible construction (88), outlines and hard shadows (96), crude illustrations (97), usability caveats (99). Negative reference is explicitly not a layout template.
 
@@ -15,7 +15,7 @@ Local frontend only; no publishing required. Original SVG paper and hourglass, t
 ## User revision — saturated digital edition
 The later user request supersedes the original analog-only and warm-white/black-cutout palette rules. World clocks are now genuine pixel-matrix DIGITAL HH / MM displays. Each city deterministically receives one of six vivid palettes (yellow, green, red, cyan, orange, pink); its identity persists across navigation. A visible MAIN badge and heavy external outline identify selection independently of theme. Green is no longer exclusive to running state.
 
-The paper is saturated pink (#ff5286), while the stopwatch hole exposes a cobalt blue layer (#2038c5). CRONO is yellow, angled upward toward the left. The handmade hourglass and its two value cards span 92% of screen height along the right arm. These requested changes retain flat colors, hard contrast, exposed square-cell construction, thick outlines and unblurred shadows. Palette combinations are intentionally controlled rather than randomly generated RGB colors.
+The paper is saturated pink (#ff5286), while the stopwatch hole exposes a cobalt blue layer (#2038c5). CHRONO is yellow, angled upward toward the left. The handmade hourglass and its two value cards span 92% of screen height along the right arm. These requested changes retain flat colors, hard contrast, exposed square-cell construction, thick outlines and unblurred shadows. Palette combinations are intentionally controlled rather than randomly generated RGB colors.
 
 ## User revision — aligned composition
 The stopwatch opening center now follows the actual hourglass throat center through ResizeObserver geometry, including viewport changes. Its RESET and START/PAUSE controls are vertically stacked underneath with full touch targets. This fills the left lower arm while preserving a small intentional separation between objects.
@@ -23,16 +23,16 @@ The stopwatch opening center now follows the actual hourglass throat center thro
 ## Semantic interaction palette
 - Cyan #00e5ff: actionable buttons, editable TOTAL, city search, selected-city marker and focus feedback. Buttons retain their cyan surface across start/reset/pause/resume states.
 - Green #39ff14: currently running numeric outputs only within timer/stopwatch; never a button-state substitution.
-- Yellow #ffe500: resting time outputs, CRONO title and timer completion notice; never an action control.
+- Yellow #ffe500: resting time outputs, CHRONO title and timer completion notice; never an action control.
 - Pink: paper and locked TOTAL, with visible LOCK label. Blue: stopwatch cutout.
 - City theme colors encode city identity only, not operational state. The cyan MAIN marker and outline communicate selection independently of that identity. Digit colors remain theme-specific as requested.
 Color is paired with text, disabled semantics, outlines and pressed displacement. Palette consistency does not depend on hover.
 
 ## Latest control refinement
-Each normal city tile has a separate accessible minus button entering deletion mode. Those badges disappear in deletion mode: tapping a city then toggles selection. Selected tiles invert their own ink/background palette and show upright REMOVE letters in a narrow central strip. Confirmation still batches deletion; cancel discards the selection. The header back control is a torn blue shape with a cyan non-pixel arrow. Stopwatch control holes share the main cobalt material and contain cyan inset action cards. CRONO follows an actual circular SVG text path along the upper-left arc.
+Each normal city tile has a separate accessible minus button entering deletion mode. Those badges disappear in deletion mode: tapping a city then toggles selection. Selected tiles invert their own ink/background palette and show upright REMOVE letters in a narrow central strip. Confirmation still batches deletion; cancel discards the selection. The header back control is a torn blue shape with a cyan non-pixel arrow. Stopwatch control holes share the main cobalt material and contain cyan inset action cards. CHRONO follows an actual circular SVG text path along the upper-left arc.
 
 ## Approved strategy implemented
-Paper reaches all exterior screen edges, with tearing restricted to the inner world-clock boundary and stopwatch cutouts. Timer controls are yellow rectangular paper labels; REMAINING is unframed black text directly on pink paper. Stopwatch controls use cyan clipped octagonal tokens inside cobalt holes. Neutral arrow-shaped navigation is separate from both families. CRONO returns to straight diagonal lettering. Minus badges move to top-right and MAIN is placed by the city name.
+Paper reaches all exterior screen edges, with tearing restricted to the inner world-clock boundary and stopwatch cutouts. Timer controls are yellow rectangular paper labels; REMAINING is unframed black text directly on pink paper. Stopwatch controls use cyan clipped octagonal tokens inside cobalt holes. Neutral arrow-shaped navigation is separate from both families. CHRONO returns to straight diagonal lettering. Minus badges move to top-right and MAIN is placed by the city name.
 
 Timer now has idle/running/paused/finished states. START becomes PAUSE; pausing freezes remaining time and sand, locks TOTAL, and reveals a smaller neutral RESET tab beneath CONTINUE. Continue resumes the stored duration; reset restores the configured total. The primary button stays yellow across states. Reset reveal does not change layout; reduced-motion suppresses animation.
 
