@@ -9,7 +9,7 @@ On desktop and tablet, CHRONO is presented inside an iPhone canvas with zoom con
 ## Demos
 
 ### Time, physics, and interaction
-![Ten-second timer, physical sand, and the inset CHRONO stopwatch](./public/demos/01-time-and-physics.gif)
+![Ten-second timer, physical sand, and the centered CHRONO stopwatch wordmark](./public/demos/01-time-and-physics.gif)
 
 ### World clocks and palettes
 ![World-clock selection, deletion, search, and palettes](./public/demos/02-world-palettes.gif)
