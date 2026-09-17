@@ -226,7 +226,7 @@ header .back>.back-card{position:relative;z-index:1;width:34px;height:32px;paddi
 
 /* The stopwatch wordmark keeps its original condensed display face.  It sits
    fully inside the clipped opening, including its rotated top edge. */
-.crono-label{font-family:Impact,'Arial Narrow',sans-serif;font-size:32px;font-weight:400;line-height:1;letter-spacing:1px;white-space:nowrap;top:22%;left:25%;}
+.crono-label{font-family:Impact,'Arial Narrow',sans-serif;font-size:32px;font-weight:400;line-height:1;letter-spacing:1px;white-space:nowrap;top:12%;left:10%;}
 
 /* Real phones use the interface directly. Desktop and tablet browsers retain
    the fixed iPhone presentation canvas, including its zoom controls. */
