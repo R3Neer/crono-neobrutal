@@ -1,6 +1,6 @@
 # CHRONO
 
-Mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
+CHRONO is a mobile world clock, timer, and stopwatch prototype built with React, TypeScript, and Vite. The interface follows a neobrutalist direction with flat saturated colors, heavy outlines, hard shadows, monospaced typography, and a cut-paper composition.
 
 On desktop and tablet, CHRONO is presented inside an iPhone canvas with zoom controls. On real phones, the interface fills the screen directly, respects device safe areas, and preserves its vertical composition when the phone rotates.
 
